@@ -26,7 +26,6 @@ namespace ProjektRandkowy.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            throw new Exception("Generujemy wyjatek");
             var users = await _repo.GetUsers();
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             return Ok(usersToReturn);
