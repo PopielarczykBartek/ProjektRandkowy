@@ -4,17 +4,19 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
 
 @Injectable()
-export class UserDetailResolver implements Resolve<User> {
+export class UserEditResolver implements Resolve<User> {
 
 constructor( private userService: UserService,
              private router: Router,
-             private alertify: AlertifyService){}
+             private alertify: AlertifyService,
+             private authService: AuthService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
-        return this.userService.getUser(route.params.id).pipe(
+        return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
             catchError(() => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['/uzytkownicy']);

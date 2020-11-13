@@ -10,6 +10,7 @@ import { User } from '../_models/user';
 export class UserService {
 
   baseUrl =  environment.apiUrl;
+  decodedToken: any;
 
 constructor(private http: HttpClient) { }
 

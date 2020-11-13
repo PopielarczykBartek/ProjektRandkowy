@@ -8,35 +8,32 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  baseUrl = environment.apiUrl + 'auth/';
 
- baseUrl = environment.apiUrl + 'auth/';
+  constructor(private http: HttpClient) {}
 
-constructor(private http: HttpClient) { }
+  jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
-jwtHelper = new JwtHelperService();
-decodedToken: any;
-
-
-login(model: any){
-return this.http.post(this.baseUrl + 'login', model)
-.pipe(map((response: any) => {
-  const user = response;
-  if (user){
-    localStorage.setItem('token', user.token);
-    this.decodedToken = this.jwtHelper.decodeToken(user.token);
-    console.log(this.decodedToken);
+  login(model: any) {
+    return this.http.post(this.baseUrl + 'login', model).pipe(
+      map((response: any) => {
+        const user = response;
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          console.log(this.decodedToken);
+        }
+      })
+    );
   }
-}));
-}
 
-register(model: any) {
- return this.http.post(this.baseUrl + 'register', model);
-}
+  register(model: any) {
+    return this.http.post(this.baseUrl + 'register', model);
+  }
 
-loggedIn(){
-const token = localStorage.getItem('token');
-return !this.jwtHelper.isTokenExpired(token);
-}
-
-
+  loggedIn(){
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 }

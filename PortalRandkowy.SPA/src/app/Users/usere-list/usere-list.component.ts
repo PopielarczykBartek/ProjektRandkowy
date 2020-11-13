@@ -14,7 +14,7 @@ export class UsereListComponent implements OnInit {
   users: User[];
 
   constructor(private userService: UserService,
-              private alertify: AlertifyService, 
+              private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,13 +22,4 @@ export class UsereListComponent implements OnInit {
       this.users = data.users;
     });
   }
-
-  // loadUsers(): void{
-  //   this.userService.getUsers().subscribe((users: User[]) => {
-  //     this.users = users;
-  //   }, error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
-
 }

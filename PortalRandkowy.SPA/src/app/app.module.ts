@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -25,8 +26,10 @@ import { UserCardComponent } from './Users/user-card/user-card.component';
 import { UserDetailComponent } from './Users/user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
-import { NgxGalleryModule } from 'ngx-gallery';
+import { UserEditComponent } from './Users/user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
+// tslint:disable-next-line: typedef
 export function _tokenGetter(){
   return localStorage.getItem('token');
 }
@@ -42,7 +45,8 @@ export function _tokenGetter(){
       LikesComponent,
       MessageComponent,
       UserCardComponent,
-      UserDetailComponent
+      UserDetailComponent,
+      UserEditComponent
    ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ export function _tokenGetter(){
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
@@ -68,7 +73,8 @@ export function _tokenGetter(){
     AuthGuard,
     ErrorInterceptorProvider,
     UserDetailResolver,
-    UserListResolver
+    UserListResolver,
+    UserEditResolver
   ],
   bootstrap: [AppComponent]
 })
