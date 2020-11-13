@@ -5,6 +5,8 @@ import { MessageComponent } from './message/message.component';
 import { UserDetailComponent } from './Users/user-detail/user-detail.component';
 import { UsereListComponent } from './Users/usere-list/usere-list.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -12,8 +14,8 @@ export const appRoutes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-        { path: 'uzytkownicy', component: UsereListComponent},
-        { path: 'uzytkownicy/:id', component: UserDetailComponent},
+        { path: 'uzytkownicy', component: UsereListComponent, resolve: {users: UserListResolver}},
+        { path: 'uzytkownicy/:id', component: UserDetailComponent, resolve: {user: UserDetailResolver}},
         { path: 'polubienia', component: LikesComponent},
         { path: 'wiadomosci', component: MessageComponent},
     ]},
