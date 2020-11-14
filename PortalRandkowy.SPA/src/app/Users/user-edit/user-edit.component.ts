@@ -1,4 +1,5 @@
 import { NgForOf } from '@angular/common';
+import { HostListener } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -15,7 +16,12 @@ export class UserEditComponent implements OnInit {
 
     user: User;
   @ViewChild('editForm') editForm: NgForm;
-
+  @HostListener('window: beforeunload', ['$event'])
+  unloadNotification($event: any): any{
+    if (this.editForm.dirty){
+      $event.returnValue = true;
+    }
+  }
   constructor(private route: ActivatedRoute, private alertify: AlertifyService) { }
 
   ngOnInit(): void{
@@ -29,6 +35,4 @@ export class UserEditComponent implements OnInit {
     this.alertify.success('Profil pomyslnie zaktualizowany');
     this.editForm.reset(this.user);
   }
-
-
 }

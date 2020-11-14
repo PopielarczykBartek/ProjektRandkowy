@@ -28,6 +28,7 @@ import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditComponent } from './Users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 // tslint:disable-next-line: typedef
 export function _tokenGetter(){
@@ -74,7 +75,8 @@ export function _tokenGetter(){
     ErrorInterceptorProvider,
     UserDetailResolver,
     UserListResolver,
-    UserEditResolver
+    UserEditResolver,
+    PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]
 })
