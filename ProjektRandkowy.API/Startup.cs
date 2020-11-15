@@ -38,7 +38,7 @@ namespace WebApplication1
                 });
 
             services.AddCors();
-
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<Seed>(); // dodanie danych testowych do bazy
             services.AddScoped<IAuthRepository, AuthRepository>(); // zarejestrowalismy nasze repozytorium
