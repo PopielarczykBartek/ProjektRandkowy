@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using ProjektRandkowy.Models;
 using CloudinaryDotNet.Actions;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
+
 
 namespace ProjektRandkowy.Controllers
 {
@@ -75,7 +75,9 @@ namespace ProjektRandkowy.Controllers
             if (await _repository.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+                //var id = photo.Id;
+                return CreatedAtRoute(nameof(GetPhoto), new { id = photo.Id }, photoToReturn);
+               // return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Nie mozna dodac zdjecia");

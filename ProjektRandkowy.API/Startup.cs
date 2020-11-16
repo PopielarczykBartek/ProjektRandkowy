@@ -56,7 +56,7 @@ namespace WebApplication1
                         ValidateAudience = false
                     };
                 });
-
+            services.AddMvc().AddMvcOptions(e => e.EnableEndpointRouting = false);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
@@ -92,10 +92,11 @@ namespace WebApplication1
             .AllowAnyMethod()
             .AllowAnyHeader());
             app.UseAuthorization(); // do autoryzacji usera, 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+            app.UseMvc();
         }
     }
 }
