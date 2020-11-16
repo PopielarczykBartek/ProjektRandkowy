@@ -12,6 +12,6 @@ namespace ProjektRandkowy.Dtos
         public string Description { get; set; } // Opis
         public DateTime DateAdded { get; set; } // Data dodania
         public bool IsMain { get; set; }        // Czy zdjecie jest główne
-        public string PublicId { get; set; }
+        public string public_id { get; set; }
     }
 }

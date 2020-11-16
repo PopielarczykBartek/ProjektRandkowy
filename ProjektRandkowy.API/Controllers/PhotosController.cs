@@ -31,17 +31,17 @@ namespace ProjektRandkowy.Controllers
             _cloudinaryConfig = cloudinaryConfig;
 
             Account account = new Account
-            {
-                Cloud = _cloudinaryConfig.Value.CloudName,
-                ApiKey = _cloudinaryConfig.Value.ApiKey,
-                ApiSecret = _cloudinaryConfig.Value.ApiSecret
-            };
+            (
+                 _cloudinaryConfig.Value.CloudName,
+                 _cloudinaryConfig.Value.ApiKey,
+                 _cloudinaryConfig.Value.ApiSecret
+            );
 
             _claudinary = new Cloudinary(account);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoForCreationDto)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -51,7 +51,7 @@ namespace ProjektRandkowy.Controllers
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {
-                using (var stream = file.OpenReadStream())
+                using ( var stream = file.OpenReadStream())
                 {
                     var uploadParams = new ImageUploadParams()
                     {
@@ -81,7 +81,7 @@ namespace ProjektRandkowy.Controllers
             return BadRequest("Nie mozna dodac zdjecia");
         }
 
-        [HttpGet("{Id}", Name = "GetPhoto")]
+        [HttpGet("{id}", Name = "GetPhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
             var photoFromRepo = await _repository.GetPhoto(id);
