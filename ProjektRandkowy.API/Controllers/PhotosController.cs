@@ -16,7 +16,7 @@ using System.Linq;
 namespace ProjektRandkowy.Controllers
 {
     [Authorize]
-    [Route ("api/users/{userId}/photos")]
+    [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase
     {
@@ -51,7 +51,7 @@ namespace ProjektRandkowy.Controllers
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {
-                using( var stream  = file.OpenReadStream())
+                using (var stream = file.OpenReadStream())
                 {
                     var uploadParams = new ImageUploadParams()
                     {
@@ -73,9 +73,26 @@ namespace ProjektRandkowy.Controllers
             userFromRepo.Photos.Add(photo);
 
             if (await _repository.SaveAll())
-                return Ok();
-             
+            {
+                var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+            }
+
             return BadRequest("Nie mozna dodac zdjecia");
         }
+
+        [HttpGet("{Id}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            var photoFromRepo = await _repository.GetPhoto(id);
+
+            var photoForReturn = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+
+            return Ok(photoForReturn);
+        }
+
+
+
+
     }
 }
