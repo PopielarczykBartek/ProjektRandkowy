@@ -39,7 +39,7 @@ namespace WebApplication1
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
