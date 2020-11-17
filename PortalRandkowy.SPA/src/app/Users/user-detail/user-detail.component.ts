@@ -52,7 +52,7 @@ export class UserDetailComponent implements OnInit {
         big: this.user.photos[i].url,
         description: this.user.photos[i].description
       });
-      return imagesUrl;
     }
+    return imagesUrl;
   }
 }
