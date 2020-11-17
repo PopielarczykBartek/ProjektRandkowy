@@ -30,6 +30,7 @@ import { UserEditComponent } from './Users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './Users/photos/photos.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // tslint:disable-next-line: typedef
 export function _tokenGetter(){
@@ -55,6 +56,7 @@ export function _tokenGetter(){
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: _tokenGetter,

@@ -37,7 +37,11 @@ namespace WebApplication1
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-            services.AddCors();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<Seed>(); // dodanie danych testowych do bazy
@@ -56,7 +60,7 @@ namespace WebApplication1
                         ValidateAudience = false
                     };
                 });
-            services.AddMvc().AddMvcOptions(e => e.EnableEndpointRouting = false);
+             services.AddMvc().AddMvcOptions(e => e.EnableEndpointRouting = false);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
@@ -87,10 +91,13 @@ namespace WebApplication1
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
+
             app.UseCors(builder => builder
             .AllowAnyOrigin()
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            );
+
             app.UseAuthorization(); // do autoryzacji usera, 
             //app.UseEndpoints(endpoints =>
             //{
