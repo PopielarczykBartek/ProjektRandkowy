@@ -29,6 +29,7 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditComponent } from './Users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotosComponent } from './Users/photos/photos.component';
 
 // tslint:disable-next-line: typedef
 export function _tokenGetter(){
@@ -47,7 +48,8 @@ export function _tokenGetter(){
       MessageComponent,
       UserCardComponent,
       UserDetailComponent,
-      UserEditComponent
+      UserEditComponent,
+      PhotosComponent
    ],
   imports: [
     BrowserModule,
