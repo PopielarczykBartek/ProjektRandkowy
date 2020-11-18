@@ -17,6 +17,8 @@ import { UserService } from 'src/app/_services/user.service';
 export class UserEditComponent implements OnInit {
 
     user: User;
+    photoUrl: string;
+
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any): any{
@@ -33,6 +35,7 @@ export class UserEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser(): void{
