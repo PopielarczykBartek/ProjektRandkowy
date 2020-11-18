@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Photo } from '../../_models/photo';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -14,6 +14,7 @@ import { UserService } from 'src/app/_services/user.service';
 export class PhotosComponent implements OnInit {
 
 @Input() photos: Photo[];
+@Output() getUserPhotoChange = new EventEmitter<string>();
 
 uploader: FileUploader;
 hasBaseDropZoneOver: false;
@@ -66,7 +67,7 @@ currentMain: Photo;
       this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
       photo.isMain = true;
-
+      this.getUserPhotoChange.emit(photo.url);
     }, error => {
       this.alertify.error(error);
     });
