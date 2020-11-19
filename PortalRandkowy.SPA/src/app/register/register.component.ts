@@ -25,6 +25,12 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
       confirmPassword: ['', Validators.required],
+      gender: ['Kobieta'],
+      dateOfBirth: [null, Validators.required],
+      zodiacSign: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+
     }, {validator: this.passwordMatchValidator});
   }
 
