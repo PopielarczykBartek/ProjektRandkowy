@@ -121,7 +121,40 @@ namespace ProjektRandkowy.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
+            var user = await _repository.GetUser(userId);
+
+            if (!user.Photos.Any(p => p.Id == id))
+                return Unauthorized();
+
+            var photoFromRepo = await _repository.GetPhoto(id);
+
+            if (photoFromRepo.IsMain)
+                return BadRequest("Nie mozna usunac zdjecia glownego!");
+
+            if(photoFromRepo.public_id != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.public_id);
+                var result = _claudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                    _repository.Delete(photoFromRepo);
+            }
+
+            if (photoFromRepo.public_id == null)
+                _repository.Delete(photoFromRepo);
+
+                if (await _repository.SaveAll())
+                return Ok();
+
+            return BadRequest("Nie udalo sie usunac zdjecia");
+
+        }
 
     }
 }
