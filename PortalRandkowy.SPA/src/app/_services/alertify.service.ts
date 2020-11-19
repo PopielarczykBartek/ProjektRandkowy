@@ -22,5 +22,12 @@ message(message: string): void{
   alertify.message(message);
 }
 
+confirm(message: string, okCalback:() => any){
+  alertify.confirm(message, (e) => {
+    if (e) {
+      okCalback();
+    } else {}
+  });
+}
 
 }
