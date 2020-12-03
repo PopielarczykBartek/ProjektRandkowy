@@ -32,6 +32,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './Users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from './_pipe/time-ago-pipe';
 
 // tslint:disable-next-line: typedef
 export function _tokenGetter(){
@@ -51,7 +52,8 @@ export function _tokenGetter(){
       UserCardComponent,
       UserDetailComponent,
       UserEditComponent,
-      PhotosComponent
+      PhotosComponent,
+      TimeAgoPipe
    ],
   imports: [
     BrowserModule,
