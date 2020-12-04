@@ -10,7 +10,7 @@ namespace ProjektRandkowy.Dtos
         // Zakładka Info
         public string Growth { get; set; }          // Wygląd - wzrost
         public string EyeColor { get; set; }        // Wygląd - kolor oczu
-        public string HairColor { get; set; }       // Wygląd - kolor włosów
+        public string HairColore { get; set; }       // Wygląd - kolor włosów
         public string MartialStatus { get; set; }   // Formalne - stan cywilny
         public string Education { get; set; }       // Formalne - wykształcenie
         public string Profession { get; set; }      // Formalne - zawód
@@ -28,7 +28,7 @@ namespace ProjektRandkowy.Dtos
 
 
         // Zakłaka Pasje, zaiteresowania
-        public string Interests { get; set; }       // Zainteresowania
+        public string Intrests { get; set; }       // Zainteresowania
         public string FreeTime { get; set; }        // Czas wolny
         public string Sport { get; set; }           // Sport
         public string Movies { get; set; }          // Filmy
@@ -40,7 +40,7 @@ namespace ProjektRandkowy.Dtos
         public string IdoNotLike { get; set; }      // Nie lubię
         public string MakesMeLaugh { get; set; }    // Rozśmiesza mnie
         public string ItFeelsBestIn { get; set; }   //Najlepiej czuję się w
-        public string FriendeWouldDescribeMe { get; set; }  // Przyjaciele opisali by mnie
+        public string FriendsWouldDescribeMe { get; set; }  // Przyjaciele opisali by mnie
 
     }
 }
