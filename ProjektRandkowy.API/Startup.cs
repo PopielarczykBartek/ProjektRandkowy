@@ -61,6 +61,7 @@ namespace WebApplication1
                     };
                 });
              services.AddMvc().AddMvcOptions(e => e.EnableEndpointRouting = false);
+             services.AddScoped<LogUserActivity>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
