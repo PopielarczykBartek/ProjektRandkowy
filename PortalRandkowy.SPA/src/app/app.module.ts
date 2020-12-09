@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -33,6 +34,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './Users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipe/time-ago-pipe';
+
 
 // tslint:disable-next-line: typedef
 export function _tokenGetter(){
@@ -59,6 +61,7 @@ export function _tokenGetter(){
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    PaginationModule.forRoot(),
     ReactiveFormsModule,
     FileUploadModule,
     BsDatepickerModule.forRoot(),

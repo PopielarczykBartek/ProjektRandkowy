@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PaginationResult } from '../_models/pagination';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from '../_models/user';
+import { PaginationResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,12 +11,12 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  baseUrl =  environment.apiUrl;
-  decodedToken: any;
+  baseUrl = environment.apiUrl;
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getUsers(page?, itemsPerPage?): Observable<PaginationResult<User[]>>{
+  getUsers(page?, itemsPerPage?): Observable<PaginationResult<User[]>> {
+
     const paginationResult: PaginationResult<User[]> = new PaginationResult<User[]>();
     let params = new HttpParams();
 
@@ -25,33 +25,33 @@ constructor(private http: HttpClient) { }
       params = params.append('pageSize', itemsPerPage);
     }
 
-    return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
-    .pipe(
-      map(response => {
-        paginationResult.result = response.body;
+    return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          paginationResult.result = response.body;
 
-        if (response.headers.get('Pagination') != null){
-          paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
-        return paginationResult;
-      })
-    );
+          if (response.headers.get('Pagination') != null) {
+            paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+
+          return paginationResult;
+        })
+      );
   }
 
-  getUser(id: number): Observable<User>{
+  getUser(id: number): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
-  updateUser(id: number, user: User): any{
+  updateUser(id: number, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id, user);
   }
 
-  setMainPhoto(userId: number, id: number): any{
+  setMainPhoto(userId: number, id: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/photos/' + id + '/setMain', {});
   }
 
-  deletePhoto(userId: number, id: number): any{
+  deletePhoto(userId: number, id: number) {
     return this.http.delete(this.baseUrl + 'users/' + userId + '/photos/' + id);
   }
-
 }

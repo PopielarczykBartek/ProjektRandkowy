@@ -12,13 +12,13 @@ export class UserListResolver implements Resolve<User[]> {
     pageNumber = 1;
     pageSize = 36;
 
-constructor( private userService: UserService,
-             private router: Router,
-             private alertify: AlertifyService){}
+    constructor(private userService: UserService,
+                private router: Router,
+                private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
         return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
-            catchError(() => {
+            catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['']);
                 return of(null);
