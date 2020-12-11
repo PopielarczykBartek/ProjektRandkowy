@@ -10,6 +10,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -64,6 +65,7 @@ export function _tokenGetter(){
     PaginationModule.forRoot(),
     ReactiveFormsModule,
     FileUploadModule,
+    ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config: {
