@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjektRandkowy.Data;
 using ProjektRandkowy.Dtos;
 using ProjektRandkowy.Helpers;
+using ProjektRandkowy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,8 +73,34 @@ namespace ProjektRandkowy.Controllers
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła się przy zapisywaniu do bazy");
         }
 
+        [HttpPost("{id}/like/recipientId")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
+            var like = await _repo.GetLike(id, recipientId);
 
+            if (like != null)
+                return BadRequest("Już lubisz tego użytkownika");
+
+            if (await _repo.GetUser(recipientId) == null)
+                return NotFound();
+
+            like = new Like
+            {
+                UserLikesId = id,
+                UserIsLikedId = recipientId
+            };
+
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Nie można polubić użytkownika");
+
+        }
 
 
 
