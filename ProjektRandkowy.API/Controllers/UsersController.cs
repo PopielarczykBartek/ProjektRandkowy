@@ -36,7 +36,7 @@ namespace ProjektRandkowy.Controllers
 
             if (string.IsNullOrEmpty(userParams.Gender))
             {
-                userParams.Gender = userFromRepo.Gender == "mezczyzna" ? "kobieta" : "mezczyzna";
+                userParams.Gender = userFromRepo.Gender == "mężczyzna" ? "kobieta" : "mężczyzna";
             }
 
             var users = await _repo.GetUsers(userParams);
