@@ -7,7 +7,6 @@ using ProjektRandkowy.Helpers;
 using ProjektRandkowy.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -73,7 +72,7 @@ namespace ProjektRandkowy.Controllers
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła się przy zapisywaniu do bazy");
         }
 
-        [HttpPost("{id}/like/recipientId")]
+        [HttpPost("{id}/like/{recipientId}")]
         public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
