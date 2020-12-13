@@ -22,6 +22,8 @@ namespace ProjektRandkowy.Helpers
 		public int MaxAge { get; set; } = 100;
 		public string ZodiacSign { get; set; } = "Wszystkie";
 		public string OrderBy { get; set; }
+		public bool UserLikes { get; set; }
+		public bool UserIsLiked { get; set; }
 
 	}
 }
