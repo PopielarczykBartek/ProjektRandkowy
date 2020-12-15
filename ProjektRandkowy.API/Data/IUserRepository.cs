@@ -1,5 +1,7 @@
 ﻿using ProjektRandkowy.Helpers;
 using ProjektRandkowy.Models;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProjektRandkowy.Data
@@ -11,6 +13,9 @@ namespace ProjektRandkowy.Data
         Task<Photo> GetPhoto(int id);
         Task<Photo> GetMainPhotoForUser(int userId);
         Task<Like> GetLike(int userId, int recipientId); // recipient - odbiorca
+        Task<Message> GetMessage(int userId);
+        Task<PagedList<Message>> GetMessagesForUser();
+        Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
 
     }
 }
