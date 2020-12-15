@@ -7,6 +7,7 @@ import { UserEditComponent } from './Users/user-edit/user-edit.component';
 import { UsereListComponent } from './Users/usere-list/usere-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { LikesResolver } from './_resolvers/likes.resolver';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
@@ -25,7 +26,8 @@ export const appRoutes: Routes = [
                                         resolve: {user: UserEditResolver},
                                         canDeactivate: [PreventUnsavedChanges]},
 
-        { path: 'polubienia', component: LikesComponent},
+        { path: 'polubienia', component: LikesComponent,
+                                resolve: {users: LikesResolver}},
         { path: 'wiadomosci', component: MessageComponent},
     ]},
     { path: '**', redirectTo: '', pathMatch: 'full'},

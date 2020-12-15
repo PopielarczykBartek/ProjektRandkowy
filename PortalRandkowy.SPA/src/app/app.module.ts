@@ -35,6 +35,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './Users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipe/time-ago-pipe';
+import { LikesResolver } from './_resolvers/likes.resolver';
 
 
 // tslint:disable-next-line: typedef
@@ -90,7 +91,8 @@ export function _tokenGetter(){
     UserDetailResolver,
     UserListResolver,
     UserEditResolver,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
+    LikesResolver
   ],
   bootstrap: [AppComponent]
 })

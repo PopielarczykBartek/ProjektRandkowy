@@ -101,7 +101,7 @@ namespace ProjektRandkowy.Data
             }
             else
             {
-                return user.UserIsLiked.Where(u => u.UserIsLikedId == id).Select(i => i.UserIsLikedId);
+                return user.UserIsLiked.Where(u => u.UserLikesId == id).Select(i => i.UserIsLikedId);
             }
         }
     }
