@@ -57,9 +57,11 @@ namespace ProjektRandkowy.Models
 
         // Zakladka zdjecia
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Like> UserLikes { get; set; }            // uzytkownik lubi
+        public ICollection<Like> UserIsLiked { get; set; }          // uzytkownik jest lubiany
+        public ICollection<Message> MessagesSent { get; set; }      // wiadomosci wysłane
+        public ICollection<Message> MessagesRecived { get; set; }   // wiadomosci odebrane
 
-        public ICollection<Like> UserLikes { get; set; }    // uzytkownik lubi
-        public ICollection<Like> UserIsLiked { get; set; }    // uzytkownik jest lubiany
 
     }
 }
