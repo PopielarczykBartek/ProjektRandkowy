@@ -7,8 +7,6 @@ using ProjektRandkowy.Helpers;
 using ProjektRandkowy.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -40,6 +38,22 @@ namespace ProjektRandkowy.Controllers
                 return NotFound();
 
             return Ok(messageFromRepo);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMessagesForUser(int userId, [FromQuery]MessageParams messageParams)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            messageParams.UserId = userId;
+            var messagesFromRepo = await _repository.GetMessagesForUser(messageParams);
+            var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
+
+            Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize, 
+                                   messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
+
+            return Ok(messagesToReturn);
         }
 
         [HttpPost]
