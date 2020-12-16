@@ -50,10 +50,22 @@ namespace ProjektRandkowy.Controllers
             var messagesFromRepo = await _repository.GetMessagesForUser(messageParams);
             var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
-            Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize, 
+            Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize,
                                    messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
 
             return Ok(messagesToReturn);
+        }
+
+        [HttpGet("thread/{recipientId}")]
+        public async Task<IActionResult> GetMessageThread(int userId, int recipientId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var messagesFromRepo = await _repository.GetMessageThread(userId, recipientId);
+            var messageThread = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
+
+            return Ok(messageThread);
         }
 
         [HttpPost]
