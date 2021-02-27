@@ -56,7 +56,7 @@ namespace ProjektRandkowy.Controllers
             return Ok(messagesToReturn);
         }
 
-        [HttpGet("thread/{recipientId}")]
+        [HttpGet("thread/{recipientId}")] // pobieranie watku wiadomosci miedzy dwoma uzytkownikami
         public async Task<IActionResult> GetMessageThread(int userId, int recipientId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

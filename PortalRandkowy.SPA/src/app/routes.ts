@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LikesComponent } from './likes/likes.component';
-import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
 import { UserDetailComponent } from './Users/user-detail/user-detail.component';
 import { UserEditComponent } from './Users/user-edit/user-edit.component';
 import { UsereListComponent } from './Users/usere-list/usere-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { LikesResolver } from './_resolvers/likes.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
@@ -28,7 +29,8 @@ export const appRoutes: Routes = [
 
         { path: 'polubienia', component: LikesComponent,
                                 resolve: {users: LikesResolver}},
-        { path: 'wiadomosci', component: MessageComponent},
+        { path: 'wiadomosci', component: MessagesComponent,
+                                resolve: {messages: MessagesResolver}},
     ]},
     { path: '**', redirectTo: '', pathMatch: 'full'},
 ];

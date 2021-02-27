@@ -21,7 +21,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
 import { UsereListComponent } from './Users/usere-list/usere-list.component';
 import { LikesComponent } from './likes/likes.component';
-import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
@@ -36,6 +36,7 @@ import { PhotosComponent } from './Users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from './_pipe/time-ago-pipe';
 import { LikesResolver } from './_resolvers/likes.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 
 // tslint:disable-next-line: typedef
@@ -52,7 +53,7 @@ export function _tokenGetter(){
       RegisterComponent,
       UsereListComponent,
       LikesComponent,
-      MessageComponent,
+      MessagesComponent,
       UserCardComponent,
       UserDetailComponent,
       UserEditComponent,
@@ -92,7 +93,8 @@ export function _tokenGetter(){
     UserListResolver,
     UserEditResolver,
     PreventUnsavedChanges,
-    LikesResolver
+    LikesResolver,
+    MessagesResolver
   ],
   bootstrap: [AppComponent]
 })

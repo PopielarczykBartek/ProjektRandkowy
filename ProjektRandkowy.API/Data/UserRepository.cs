@@ -1,12 +1,11 @@
-﻿using ProjektRandkowy.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektRandkowy.API.Data;
+using ProjektRandkowy.Helpers;
 using ProjektRandkowy.Models;
 using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using ProjektRandkowy.Helpers;
-using CloudinaryDotNet.Actions;
 
 namespace ProjektRandkowy.Data
 {
@@ -118,13 +117,13 @@ namespace ProjektRandkowy.Data
 
             switch (messageParams.MessageContainer)
             {
-                case "Inbox":
+                case "Inbox": // skrzynka odbiorcza
                     messages = messages.Where(u => u.RecipientId == messageParams.UserId);
                     break;
-                case "Outbox":
+                case "Outbox": // nadawcza
                     messages = messages.Where(u => u.SenderId == messageParams.UserId);
                     break;
-                default:
+                default: // domyslnie nieprzeczytane wiadomosci
                     messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.IsRead == false);
                     break;
             }
@@ -134,7 +133,7 @@ namespace ProjektRandkowy.Data
             return await PagedList<Message>.CreateListAsync(messages, messageParams.PageNumber, messageParams.PageSize);
 
         }
-        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId) //pobieranie watku wiadomosci miedzy dwoma uzytkwonikami
         {
             var messages = await _context.Messages
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
@@ -145,10 +144,6 @@ namespace ProjektRandkowy.Data
                     .ToListAsync();
 
             return messages;
-
-
         }
-
-        
     }
 }
