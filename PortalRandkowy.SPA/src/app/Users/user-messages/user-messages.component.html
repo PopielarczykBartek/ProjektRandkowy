@@ -56,7 +56,7 @@
                 name="content"
                 required>
                 <div class="input-group-append">
-                    <button class="btn btn-primary"[disabled]="messageForm.valid">Wyślij</button>
+                    <button class="btn btn-primary" [disabled]="!messageForm.valid">Wyślij</button>
                 </div>
             </div>
         </form>
