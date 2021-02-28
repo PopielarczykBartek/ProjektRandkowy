@@ -1,0 +1,16 @@
+.img-circle{
+    width: 50px;
+}
+table{
+    margin-top: 5px;
+}
+
+td{
+    vertical-align: middle;
+}
+th{
+    vertical-align: middle;
+}
+button{
+ margin-right: 10px;
+}
