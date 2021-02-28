@@ -14,7 +14,7 @@ export class UserMessagesComponent implements OnInit {
 
   @Input() recipientId: number;
   messages: Message[];
-
+  newMessage: any = {};
 
 
   constructor(private userServices: UserService,
@@ -34,6 +34,15 @@ export class UserMessagesComponent implements OnInit {
     });
   }
 
-
+  sendMessage(){
+    this.newMessage.recipientId = this.recipientId;
+    this.userServices.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+    .subscribe((message: Message) => {
+      this.messages.unshift(message);
+      this.newMessage.content = '';
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 
 }
