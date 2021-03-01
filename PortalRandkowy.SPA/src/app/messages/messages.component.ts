@@ -40,9 +40,24 @@ export class MessagesComponent implements OnInit {
         });
   }
 
+  deleteMessage(id: number):any{
+    this.alertify.confirm("Czy na pewno chcesz usunąć tą wiadomość?", () => {
+      this.userService.deleteMessage(id, this.authService.decodedToken.nameid)
+      .subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id === id), 1); // usniecie wiadomosci z naszej listy
+        this.alertify.success("Wiadomość została pomyślnie usnięta.");
+      }, error => {
+        this.alertify.error("Nie udalo się usunąć wiadomości.");
+      });
+    });
+  }
+
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadMessages();
   }
+
+
+
 
 }
