@@ -16,6 +16,7 @@ export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
   messageContainer = 'Nieprzeczytane';
+  flagaOutbox = false;
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -31,10 +32,16 @@ export class MessagesComponent implements OnInit {
 
   loadMessages(): any{
     this.userService.getMessages(this.authService.decodedToken.nameid, this.pagination.currentPage,
-                                  this.pagination.itemsPerPage, this.messages)
+                                  this.pagination.itemsPerPage, this.messageContainer)
         .subscribe((res: PaginationResult<Message[]> | any) => {
           this.messages = res.result;
           this.pagination = res.pagination;
+          
+          if(res.result[0].messageContainer === 'Outbox'){
+            this.flagaOutbox = true;
+          } else{
+            this.flagaOutbox = false;
+          }
         }, error => {
           this.alertify.error(error); 
         });

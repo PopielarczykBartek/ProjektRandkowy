@@ -121,7 +121,7 @@ namespace ProjektRandkowy.Data
                     messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.RecipientDeleted == false) ;
                     break;
                 case "Outbox": // nadawcza
-                    messages = messages.Where(u => u.SenderId == messageParams.UserId && u.SenderDeleted == true);
+                    messages = messages.Where(u => u.SenderId == messageParams.UserId && u.SenderDeleted == false);
                     break;
                 default: // domyslnie nieprzeczytane wiadomosci
                     messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.IsRead == false && u.RecipientDeleted == false);

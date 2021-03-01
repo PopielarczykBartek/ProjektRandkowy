@@ -15,5 +15,6 @@ namespace ProjektRandkowy.Dtos
         public bool IsRead { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime DateSent { get; set; }
+        public string MessageContainer { get; set; }
     }
 }
